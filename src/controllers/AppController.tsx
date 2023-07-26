@@ -4,13 +4,16 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
+import axios from "axios";
 import NexusClient from "grindery-nexus-client";
 // @ts-ignore
 import Web3Modal from "web3modal";
 // @ts-ignore
 import * as ethers from "ethers";
+// @ts-ignore
+import Cookies from "js-cookie";
+import { encode } from "universal-base64url";
 import { ENGINE_URL } from "../config";
-import axios from "axios";
 import {
   AuthToken,
   STATUS,
@@ -19,15 +22,12 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../store";
-import { encode } from "universal-base64url";
 import {
   getErrorMessage,
   sendGoogleEvent,
   sendLuckyorangeIdentity,
   sendTwitterConversion,
 } from "../utils";
-// @ts-ignore
-import Cookies from "js-cookie";
 
 // define context properties
 type ContextProps = {
