@@ -17,118 +17,120 @@ export const RightColumn = (props: Props) => {
   const { handleConnectMetaMaskClick, handleEmailConfirmedClick } =
     useAppController();
 
-  const renderContentByStatus = () => {
+  const renderTitle = () => {
     switch (status) {
       case STATUS.WAITING_EMAIL:
         return (
-          <>
-            <Title
-              title="Seems like you are new to Grindery"
-              description="Please provide your email address so we can activate your account."
-            />
-            <EmailForm />
-          </>
+          <Title
+            title="Seems like you are new to Grindery"
+            description="Please provide your email address so we can activate your account."
+          />
         );
       case STATUS.WAITING_EMAIL_CONFIRMATION:
         return (
-          <>
-            <Title
-              title="Confirm your email"
-              description={STATUS_DETAILS[status].text}
-            />
-            <Button
-              fullWidth
-              onClick={handleEmailConfirmedClick}
-              disabled={isLoading}
-            >
-              Continue
-            </Button>
-          </>
+          <Title
+            title="Confirm your email"
+            description={STATUS_DETAILS[status].text}
+          />
         );
       case STATUS.WAITING_WORKSPACE:
+        return <Title title="Select workspace" />;
+      default:
         return (
-          <>
-            <Title title="Select workspace" />
-            <WorkspaceForm />
-          </>
+          <Title
+            title="Join us or log in"
+            description="Connect MetaMask wallet to create a new account or to log into your existing one."
+          />
         );
+    }
+  };
+
+  const renderContent = () => {
+    switch (status) {
+      case STATUS.WAITING_EMAIL:
+        return <EmailForm />;
+      case STATUS.WAITING_EMAIL_CONFIRMATION:
+        return (
+          <Button
+            fullWidth
+            onClick={handleEmailConfirmedClick}
+            disabled={isLoading}
+          >
+            Continue
+          </Button>
+        );
+      case STATUS.WAITING_WORKSPACE:
+        return <WorkspaceForm />;
       case STATUS.ERROR:
         return (
-          <>
-            <Title
-              title="Join us or log in"
-              description="Connect MetaMask wallet to create a new account or to log into your existing one."
-            />
-            <Button
-              fullWidth
-              startIcon={<img src="/images/metamask.svg" alt="MetaMask icon" />}
-              onClick={handleConnectMetaMaskClick}
-              disabled={isLoading}
-            >
-              Continue with MetaMask
-            </Button>
-
-            <Alert
-              severity="error"
-              sx={{
-                borderRadius: "5px",
-                width: "100%",
-                boxSizing: "border-box",
-              }}
-            >
-              {error}
-            </Alert>
-          </>
+          <Button
+            fullWidth
+            startIcon={<img src="/images/metamask.svg" alt="MetaMask icon" />}
+            onClick={handleConnectMetaMaskClick}
+            disabled={isLoading}
+          >
+            Continue with MetaMask
+          </Button>
         );
       case STATUS.UNAUTHENTICATED:
         return (
-          <>
-            <Title
-              title="Join us or log in"
-              description="Connect MetaMask wallet to create a new account or to log into your existing one."
-            />
-            <Button
-              fullWidth
-              startIcon={<img src="/images/metamask.svg" alt="MetaMask icon" />}
-              onClick={handleConnectMetaMaskClick}
-              disabled={isLoading}
-            >
-              Continue with MetaMask
-            </Button>
-            {status !== STATUS.UNAUTHENTICATED && (
-              <Alert
-                severity={STATUS_DETAILS[status].severity}
-                sx={{
-                  borderRadius: "5px",
-                  width: "100%",
-                  boxSizing: "border-box",
-                }}
-              >
-                {status === STATUS.ERROR ? error : STATUS_DETAILS[status].text}
-              </Alert>
-            )}
-          </>
+          <Button
+            fullWidth
+            startIcon={<img src="/images/metamask.svg" alt="MetaMask icon" />}
+            onClick={handleConnectMetaMaskClick}
+            disabled={isLoading}
+          >
+            Continue with MetaMask
+          </Button>
         );
       default:
-        return (
-          <>
-            <Title
-              title="Join us or log in"
-              description="Connect MetaMask wallet to create a new account or to log into your existing one."
-            />
+        return null;
+    }
+  };
 
-            <Alert
-              severity={STATUS_DETAILS[status].severity}
-              sx={{
-                borderRadius: "5px",
-                width: "100%",
-                boxSizing: "border-box",
-              }}
-            >
-              {STATUS_DETAILS[status].text}
-            </Alert>
-          </>
+  const renderAlert = () => {
+    switch (status) {
+      case STATUS.WAITING_EMAIL:
+        return null;
+      case STATUS.WAITING_EMAIL_CONFIRMATION:
+        return null;
+      case STATUS.WAITING_WORKSPACE:
+        return null;
+      case STATUS.ERROR:
+        return (
+          <Alert
+            severity="error"
+            sx={{
+              borderRadius: "5px",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            {error}
+          </Alert>
         );
+      case STATUS.UNAUTHENTICATED:
+        return null;
+      default:
+        return (
+          <Alert
+            severity={STATUS_DETAILS[status].severity}
+            sx={{
+              borderRadius: "5px",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            {STATUS_DETAILS[status].text}
+          </Alert>
+        );
+    }
+  };
+
+  const renderConsent = () => {
+    switch (status) {
+      default:
+        return <ConsentMessage />;
     }
   };
 
@@ -139,8 +141,10 @@ export const RightColumn = (props: Props) => {
       }}
     >
       <Form>
-        {renderContentByStatus()}
-        <ConsentMessage />
+        {renderTitle()}
+        {renderContent()}
+        {renderAlert()}
+        {renderConsent()}
       </Form>
     </Column>
   );
