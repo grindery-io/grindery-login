@@ -37,7 +37,9 @@ export const WorkspaceForm = (props: Props) => {
         >
           <MenuItem value={"personal"}>Personal workspace</MenuItem>
           {workspaces.map((workspace) => (
-            <MenuItem value={workspace.key}>{workspace.title}</MenuItem>
+            <MenuItem key={workspace.key} value={workspace.key}>
+              {workspace.title}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# Grindery Login
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Grindery Login Application Overview
 
-## Available Scripts
+Grindery Login is an interactive authentication application built with React and integrated with the Ethereum blockchain. This application serves as the central authentication mechanism for all Grindery apps, providing a streamlined user login and signup process.
 
-In the project directory, you can run:
+Users from various Grindery applications are redirected to the Grindery Login app for sign-in or sign-up. Once the authentication process is completed, users are then seamlessly redirected back to the referring application.
 
-### `npm start`
+The Grindery Login application interacts with the user's MetaMask wallet, manages the submission and confirmation of user emails, and handles user workspaces. It utilizes the power of Redux for state management, maintaining crucial application states like user tokens, workspaces, and the current status of the app.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Communication with the remote server is handled through the `NexusClient` library, providing a clean and straightforward API for server-side operations. The `Web3Modal` library is used for the integration with MetaMask, the user's Ethereum wallet.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+To get started with the Grindery Login application:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies using either `npm install` or `yarn install`.
+3. Start the application in development mode with `npm start` or `yarn start`.
 
-### `npm run build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Commits to the `main` branch of the repository will be automatically deployed to the production environment. You can access the production application at [https://login.grindery.io](https://login.grindery.io).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Commits to the `staging` branch will be deployed to the staging environment. The staging application can be accessed at [https://login-staging.grindery.io](https://login-staging.grindery.io).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Config Options
 
-### `npm run eject`
+Config options can be specified via URL query parameters. The following options are available:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `redirect_uri`: The URL of the app where the user should be redirected after successfully signing in.
+- `workspaceRequired`: If set to `1`, the user will have to select a specific workspace from the list of user's workspaces to complete authentication.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The Grindery Login application is licensed under the [MIT license](https://choosealicense.com/licenses/mit/).

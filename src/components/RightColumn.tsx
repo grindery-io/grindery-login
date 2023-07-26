@@ -133,7 +133,11 @@ export const RightColumn = (props: Props) => {
   };
 
   return (
-    <Column sx={{ background: "#fff" }}>
+    <Column
+      sx={{
+        background: "#fff",
+      }}
+    >
       <Form>
         {renderContentByStatus()}
         <ConsentMessage />

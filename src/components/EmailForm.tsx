@@ -31,8 +31,11 @@ export const EmailForm = (props: Props) => {
       <FormControl variant="standard" sx={{ width: "100%" }}>
         <Simpleinput
           fullWidth
+          name="email"
+          type="email"
           id="email-input"
           placeholder="Enter your email"
+          autoComplete="email"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setError(null);
             setInput({
@@ -52,7 +55,7 @@ export const EmailForm = (props: Props) => {
         sx={{ textAlign: "left" }}
       >
         {Object.entries(ONBOARDING_FIELDS).map(([key, value]) => (
-          <Box>
+          <Box key={key}>
             <Typography
               style={{
                 fontSize: "14px",
@@ -83,6 +86,7 @@ export const EmailForm = (props: Props) => {
             </Typography>
             {value.options.map((option) => (
               <Stack
+                key={option.value}
                 direction="row"
                 alignItems="flex-start"
                 justifyContent="flex-start"
