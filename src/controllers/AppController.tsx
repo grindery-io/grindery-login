@@ -86,6 +86,7 @@ const AppController = ({ children }: AppControllerProps) => {
     workspaces, // An array representing the user's workspaces.
     status, // The current status of the app.
     workspace, // The key of the selected workspace.
+    isDebugMode, // A boolean indicating if debug mode is enabled.
   } = useAppSelector(selectAppStore);
 
   // get selected workspace object
@@ -240,21 +241,24 @@ const AppController = ({ children }: AppControllerProps) => {
       // set status to authenticating
       dispatch(appStoreActions.setStatus(STATUS.AUTHENTICATING));
       try {
-        // create nexus client
-        const client = new NexusClient(token?.access_token);
+        // if debug mode is enabled, skip the server and set status to waiting email confirmation
+        if (!isDebugMode) {
+          // create nexus client
+          const client = new NexusClient(token?.access_token);
 
-        // submit email and other user data to Hubspot
-        const res = await client.user.requestEarlyAccess({
-          email: input.email[0],
-          source: window.location.href,
-          app: "Requested to Gateway",
-          interest: input.interest.join(";"),
-          skill: input.skill.join(";"),
-          hutk: Cookies.get("hubspotutk") || "",
-          pageName: document.getElementsByTagName("title")[0].innerHTML || "",
-        });
-        if (!res) {
-          throw new Error("Unknown server error. Please, try again later.");
+          // submit email and other user data to Hubspot
+          const res = await client.user.requestEarlyAccess({
+            email: input.email[0],
+            source: window.location.href,
+            app: "Requested to Gateway",
+            interest: input.interest.join(";"),
+            skill: input.skill.join(";"),
+            hutk: Cookies.get("hubspotutk") || "",
+            pageName: document.getElementsByTagName("title")[0].innerHTML || "",
+          });
+          if (!res) {
+            throw new Error("Unknown server error. Please, try again later.");
+          }
         }
 
         // set status to waiting email confirmation
@@ -270,7 +274,7 @@ const AppController = ({ children }: AppControllerProps) => {
       // set loading to false
       dispatch(appStoreActions.setIsLoading(false));
     },
-    [token, dispatch]
+    [isDebugMode, token, dispatch]
   );
 
   /**
