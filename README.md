@@ -2,7 +2,7 @@
 
 ## Grindery Login Application Overview
 
-Grindery Login is an interactive authentication application built with React and integrated with the Ethereum blockchain. This application serves as the central authentication mechanism for all Grindery apps, providing a streamlined user login and signup process.
+Grindery Login is an interactive authentication application built with React and integrated with the Ethereum blockchain. This application serves as the central authentication mechanism for all [Grindery](https://www.grindery.io) apps, providing a streamlined user login and signup process.
 
 Users from various Grindery applications are redirected to the Grindery Login app for sign-in or sign-up. Once the authentication process is completed, users are then seamlessly redirected back to the referring application.
 
@@ -20,9 +20,9 @@ To get started with the Grindery Login application:
 
 ## Deployment
 
-Commits to the `main` branch of the repository will be automatically deployed to the production environment. You can access the production application at [https://login.grindery.io](https://login.grindery.io).
+Commits to the `main` branch of the repository will be automatically deployed to the production environment. You can access the production application at [login.grindery.io](https://login.grindery.io).
 
-Commits to the `staging` branch will be deployed to the staging environment. The staging application can be accessed at [https://login-staging.grindery.io](https://login-staging.grindery.io).
+Commits to the `staging` branch will be deployed to the staging environment. The staging application can be accessed at [login-staging.grindery.io](https://login-staging.grindery.io).
 
 ## Config Options
 
