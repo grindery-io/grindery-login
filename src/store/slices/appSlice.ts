@@ -23,6 +23,7 @@ export type AuthToken = {
 
 interface AppState {
   error: string;
+  isDebugMode: boolean;
   isLoading: boolean;
   isWorkspaceRequired: boolean;
   redirect: string;
@@ -34,6 +35,7 @@ interface AppState {
 
 const initialState: AppState = {
   error: "",
+  isDebugMode: false,
   isLoading: false,
   isWorkspaceRequired: false,
   redirect: DEFAULT_REDIRECT,
@@ -70,6 +72,9 @@ const appSlice = createSlice({
     },
     setWorkspace(state, action: PayloadAction<string>) {
       state.workspace = action.payload;
+    },
+    setIsDebugMode(state, action: PayloadAction<boolean>) {
+      state.isDebugMode = action.payload;
     },
   },
 });
