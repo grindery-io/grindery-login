@@ -73,7 +73,27 @@ export const RightColumn = (props: Props) => {
           </Button>
         );
       case STATUS.UNAUTHENTICATED:
-        return (
+        return !window.ethereum ? (
+          <Alert
+            severity="error"
+            sx={{
+              borderRadius: "5px",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            An injected Ethereum provider such as{" "}
+            <a
+              href="https://metamask.io/"
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "#d32f2f" }}
+            >
+              MetaMask
+            </a>{" "}
+            is needed to authenticate.
+          </Alert>
+        ) : (
           <Button
             fullWidth
             startIcon={<img src="/images/metamask.svg" alt="MetaMask icon" />}
