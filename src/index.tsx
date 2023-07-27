@@ -2,12 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SessionController from "./controllers/SessionController";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
+const router = createBrowserRouter([
+  {
+    path: "/session",
+    element: <SessionController />,
+  },
+  {
+    path: "*",
+    element: <App />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
