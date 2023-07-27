@@ -5,6 +5,7 @@ import React, {
   useEffect,
 } from "react";
 import axios from "axios";
+import jwt_decode, { JwtPayload } from "jwt-decode";
 import NexusClient from "grindery-nexus-client";
 // @ts-ignore
 import Web3Modal from "web3modal";
@@ -87,6 +88,8 @@ const AppController = ({ children }: AppControllerProps) => {
     status, // The current status of the app.
     workspace, // The key of the selected workspace.
     isDebugMode, // A boolean indicating if debug mode is enabled.
+    state, // The state parameter from the URL.
+    responseType, // The response_type parameter from the URL.
   } = useAppSelector(selectAppStore);
 
   // get selected workspace object
@@ -193,6 +196,16 @@ const AppController = ({ children }: AppControllerProps) => {
           }
         );
       }
+
+      // get user wallet address from token
+      const decodedToken = jwt_decode<JwtPayload>(
+        accessToken?.access_token || ""
+      );
+      const userId = decodedToken.sub || "";
+      const address = userId.split(":")[2];
+
+      // save user wallet address to local storage
+      localStorage.setItem("grindery_user_address", address);
 
       // create nexus client
       const client = new NexusClient(accessToken?.access_token);
@@ -335,22 +348,10 @@ const AppController = ({ children }: AppControllerProps) => {
   const getCode = useCallback(async () => {
     // set loading to true
     dispatch(appStoreActions.setIsLoading(true));
-    try {
-      // get login code
-      const res = await axios.post(
-        `https://orchestrator.grindery.org/oauth/get-login-code`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${
-              selectedWorkspace?.token || token?.access_token || ""
-            }`,
-          },
-        }
-      );
 
-      // if code is present, redirect to redirect url with code
-      if (res?.data?.code) {
+    try {
+      // if token is present, send analytics events
+      if (token?.access_token) {
         // create nexus client
         const client = new NexusClient(token?.access_token);
         // get user id and email
@@ -373,13 +374,35 @@ const AppController = ({ children }: AppControllerProps) => {
             });
           }
         }
+      }
 
-        // redirect to redirect url with code
-        window.location.href = `${redirect}${
-          /\?/.test(redirect) ? "&" : "?"
-        }code=${res?.data?.code}`;
+      // if response type is code, get login code
+      if (responseType === "code") {
+        // get login code
+        const res = await axios.post(
+          `https://orchestrator.grindery.org/oauth/get-login-code`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${
+                selectedWorkspace?.token || token?.access_token || ""
+              }`,
+            },
+          }
+        );
+
+        // if code is present, redirect to redirect url with code
+        if (res?.data?.code) {
+          // redirect to redirect url with code and state
+          window.location.href = `${redirect}${
+            /\?/.test(redirect) ? "&" : "?"
+          }code=${res?.data?.code}${state ? "&state=" + state : ""}`;
+        } else {
+          throw new Error("Unknown server error. Please, try again later.");
+        }
       } else {
-        throw new Error("Unknown server error. Please, try again later.");
+        // redirect to redirect url without code and state
+        window.location.href = redirect;
       }
     } catch (error: any) {
       // set error to store, update status to error and clear token in store
@@ -388,16 +411,17 @@ const AppController = ({ children }: AppControllerProps) => {
       dispatch(appStoreActions.setToken(null));
       dispatch(appStoreActions.setStatus(STATUS.ERROR));
     }
+
     // set loading to false
     dispatch(appStoreActions.setIsLoading(false));
-  }, [token, selectedWorkspace, redirect, dispatch]);
+  }, [state, responseType, token, selectedWorkspace, redirect, dispatch]);
 
   // get workspaces on component mount
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
 
-  // get code on status change
+  // get code and redirect user on status change
   useEffect(() => {
     if (status === STATUS.REDIRECTING) {
       getCode();
