@@ -47,7 +47,7 @@ const SessionController = () => {
 
       // get parent origin
       // eslint-disable-next-line
-      const parentOrigin = document.referrer.match(/^.+:\/\/[^\/]+/)?.[0];
+      const parentOrigin = window.parent.origin;
 
       // throw error if parent origin is not grindery.io
       if (!parentOrigin?.endsWith("grindery.io")) {
@@ -64,7 +64,7 @@ const SessionController = () => {
       window.parent.postMessage(
         {
           method: "grindery-auth-session",
-          params: { accessToken, userId, address },
+          params: { token: accessToken, user: userId, address },
         },
         parentOrigin
       );
@@ -79,10 +79,39 @@ const SessionController = () => {
     }
   }, [address]);
 
+  // clear user auth session
+  const clearSession = useCallback(async () => {
+    try {
+      await axios.post(
+        `${ENGINE_URL}/oauth/session-register`,
+        {},
+        { withCredentials: true }
+      );
+    } catch (error: any) {
+      console.error("clearSession error: ", getErrorMessage(error));
+    }
+  }, []);
+
   // restore user auth session on mount
   useEffect(() => {
     restoreSession();
   }, [restoreSession]);
+
+  // listen for auth session clear message from parent window
+  useEffect(() => {
+    // handle message
+    function handleMessage(event: any) {
+      if (event.data?.method === "grindery-auth-session-clear") {
+        clearSession();
+      }
+    }
+
+    // add event listener
+    window.addEventListener("message", handleMessage);
+
+    // remove event listener on unmount
+    return () => window.removeEventListener("message", handleMessage);
+  }, [clearSession]);
 
   return <></>;
 };
