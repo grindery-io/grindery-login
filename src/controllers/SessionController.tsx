@@ -47,12 +47,12 @@ const SessionController = () => {
 
       // get parent origin
       // eslint-disable-next-line
-      const parentOrigin = window.parent.origin;
+      const parentOrigin = document.referrer.match(/^.+:\/\/[^\/]+/)?.[0];
 
       // throw error if parent origin is not grindery.io
-      if (!parentOrigin?.endsWith("grindery.io")) {
+      /*if (!parentOrigin?.endsWith("grindery.io")) {
         throw new Error("Incorrect origin");
-      }
+      }*/
 
       // get user id from token
       const decodedToken = jwt_decode<JwtPayload>(
@@ -66,7 +66,7 @@ const SessionController = () => {
           method: "grindery-auth-session",
           params: { token: accessToken, user: userId, address },
         },
-        parentOrigin
+        parentOrigin || "*"
       );
     } catch (error: any) {
       console.error("restoreSession error: ", getErrorMessage(error));
