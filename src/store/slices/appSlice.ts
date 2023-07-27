@@ -31,17 +31,17 @@ export type WorkspaceType = {
 
 // Interface for the AppState object representing the state of the app
 interface AppState {
-  error: string;
-  isDebugMode: boolean;
-  isLoading: boolean;
-  isWorkspaceRequired: boolean;
-  redirect: string;
-  responseType: string;
-  state: string;
-  status: STATUS;
-  token: AuthToken | null;
-  workspaces: WorkspaceType[];
-  workspace: string;
+  error: string; // Error message
+  isDebugMode: boolean; // Debug mode flag
+  isLoading: boolean; // Loading flag
+  isWorkspaceRequired: boolean; // Workspace required flag
+  redirect: string; // Redirect URL
+  responseType: string; // Response type
+  state: string; // State
+  status: STATUS; // App status
+  token: AuthToken | null; // Auth token
+  workspaces: WorkspaceType[]; // List of user workspaces
+  workspace: string; // Selected workspace
 }
 
 // Initial state for the app's Redux store
