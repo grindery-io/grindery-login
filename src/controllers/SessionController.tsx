@@ -50,7 +50,10 @@ const SessionController = () => {
       const parentOrigin = document.referrer.match(/^.+:\/\/[^\/]+/)?.[0];
 
       // throw error if parent origin is not grindery.io
-      if (!parentOrigin?.endsWith("grindery.io")) {
+      if (
+        !parentOrigin?.endsWith("grindery.io") &&
+        !parentOrigin?.endsWith("grindery.org")
+      ) {
         throw new Error("Incorrect origin");
       }
 
