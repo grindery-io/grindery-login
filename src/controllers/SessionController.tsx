@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import axios from "axios";
+import jwt_decode, { JwtPayload } from "jwt-decode";
 import { ENGINE_URL } from "../config";
 import { getErrorMessage } from "../utils";
 
@@ -53,9 +54,18 @@ const SessionController = () => {
         throw new Error("Incorrect origin");
       }
 
+      // get user id from token
+      const decodedToken = jwt_decode<JwtPayload>(
+        accessToken?.access_token || ""
+      );
+      const userId = decodedToken.sub || "";
+
       // send user token object to parent window
       window.parent.postMessage(
-        { method: "grindery-auth-session", params: accessToken },
+        {
+          method: "grindery-auth-session",
+          params: { accessToken, userId, address },
+        },
         parentOrigin
       );
     } catch (error: any) {
