@@ -87,6 +87,9 @@ const SessionController = () => {
         {},
         { withCredentials: true }
       );
+
+      // remove user address from local storage
+      localStorage.removeItem("grindery_user_address");
     } catch (error: any) {
       console.error("clearSession error: ", getErrorMessage(error));
     }
