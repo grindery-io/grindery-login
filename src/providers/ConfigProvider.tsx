@@ -37,6 +37,12 @@ const ConfigProvider = ({ children }: Props) => {
   // get workspace required
   const workspaceRequired = urlParams.get("workspace_required");
 
+  // get response type
+  const response_type = urlParams.get("response_type");
+
+  // get state param
+  const state = urlParams.get("state");
+
   // get debug mode
   const debugMode = urlParams.get("debug");
 
@@ -60,6 +66,20 @@ const ConfigProvider = ({ children }: Props) => {
       dispatch(appStoreActions.setIsDebugMode(true));
     }
   }, [debugMode, dispatch]);
+
+  // set response type to store
+  useEffect(() => {
+    if (response_type) {
+      dispatch(appStoreActions.setResponseType(response_type));
+    }
+  }, [response_type, dispatch]);
+
+  // set state to store
+  useEffect(() => {
+    if (state) {
+      dispatch(appStoreActions.setState(state));
+    }
+  }, [state, dispatch]);
 
   return <>{children}</>;
 };

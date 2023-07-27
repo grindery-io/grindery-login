@@ -36,6 +36,8 @@ interface AppState {
   isLoading: boolean;
   isWorkspaceRequired: boolean;
   redirect: string;
+  responseType: string;
+  state: string;
   status: STATUS;
   token: AuthToken | null;
   workspaces: WorkspaceType[];
@@ -49,6 +51,8 @@ const initialState: AppState = {
   isLoading: false,
   isWorkspaceRequired: false,
   redirect: DEFAULT_REDIRECT,
+  responseType: "",
+  state: "",
   status: STATUS.UNAUTHENTICATED,
   token: null,
   workspaces: [],
@@ -95,6 +99,14 @@ const appSlice = createSlice({
     // Reducer to set the isDebugMode state
     setIsDebugMode(state, action: PayloadAction<boolean>) {
       state.isDebugMode = action.payload;
+    },
+    // Reducer to set the responseType state
+    setResponseType(state, action: PayloadAction<string>) {
+      state.responseType = action.payload;
+    },
+    // Reducer to set the state state
+    setState(state, action: PayloadAction<string>) {
+      state.state = action.payload;
     },
   },
 });
