@@ -50,9 +50,9 @@ const SessionController = () => {
       const parentOrigin = document.referrer.match(/^.+:\/\/[^\/]+/)?.[0];
 
       // throw error if parent origin is not grindery.io
-      /*if (!parentOrigin?.endsWith("grindery.io")) {
+      if (!parentOrigin?.endsWith("grindery.io")) {
         throw new Error("Incorrect origin");
-      }*/
+      }
 
       // get user id from token
       const decodedToken = jwt_decode<JwtPayload>(
@@ -90,7 +90,6 @@ const SessionController = () => {
 
       // remove user address from local storage
       localStorage.removeItem("grindery_user_address");
-      console.log("debug session clear: user address removed from storage");
     } catch (error: any) {
       console.error("clearSession error: ", getErrorMessage(error));
     }
@@ -106,7 +105,6 @@ const SessionController = () => {
     // handle message
     function handleMessage(event: any) {
       if (event.data?.method === "grindery-auth-session-clear") {
-        console.log("debug session clear", event.data);
         clearSession();
       }
     }
