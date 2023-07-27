@@ -52,7 +52,8 @@ const SessionController = () => {
       // throw error if parent origin is not grindery.io
       if (
         !parentOrigin?.endsWith("grindery.io") &&
-        !parentOrigin?.endsWith("grindery.org")
+        !parentOrigin?.endsWith("grindery.org") &&
+        !parentOrigin?.endsWith("localhost:3000")
       ) {
         throw new Error("Incorrect origin");
       }
