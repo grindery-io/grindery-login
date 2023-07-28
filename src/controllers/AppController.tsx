@@ -181,22 +181,6 @@ const AppController = ({ children }: AppControllerProps) => {
       // set token to store
       dispatch(appStoreActions.setToken(accessToken));
 
-      // register session
-      if (accessToken?.refresh_token) {
-        await axios.post(
-          `${ENGINE_URL}/oauth/session-register`,
-          {
-            refresh_token: accessToken?.refresh_token,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
-        );
-      }
-
       // get user wallet address from token
       const decodedToken = jwt_decode<JwtPayload>(
         accessToken?.access_token || ""
@@ -352,6 +336,22 @@ const AppController = ({ children }: AppControllerProps) => {
     try {
       // if token is present, send analytics events
       if (token?.access_token) {
+        // register session
+        if (token?.refresh_token) {
+          await axios.post(
+            `${ENGINE_URL}/oauth/session-register`,
+            {
+              refresh_token: token.refresh_token,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              withCredentials: true,
+            }
+          );
+        }
+
         // create nexus client
         const client = new NexusClient(token?.access_token);
         // get user id and email
