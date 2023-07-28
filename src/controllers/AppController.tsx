@@ -29,6 +29,7 @@ import {
   sendLuckyorangeIdentity,
   sendTwitterConversion,
 } from "../utils";
+import useContentHeight from "../hooks/useContentHeight";
 
 // define context properties
 type ContextProps = {
@@ -76,6 +77,9 @@ export const AppContext = createContext<ContextProps>({
  * @returns {JSX.Element} A provider component which provides the AppContext to its children.
  */
 const AppController = ({ children }: AppControllerProps) => {
+  // get content height
+  const { height } = useContentHeight();
+
   // redux dispatcher
   const dispatch = useAppDispatch();
 
@@ -427,6 +431,16 @@ const AppController = ({ children }: AppControllerProps) => {
       getCode();
     }
   }, [status, getCode]);
+
+  // send resize message to parent window on height change
+  useEffect(() => {
+    if (window && window.parent) {
+      window.parent.postMessage(
+        { method: "gr_resize", params: { height } },
+        "*"
+      );
+    }
+  }, [height]);
 
   return (
     <AppContext.Provider
