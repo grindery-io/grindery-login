@@ -26,6 +26,7 @@ import {
 import {
   getErrorMessage,
   sendGoogleEvent,
+  sendHubSpotIdentity,
   sendLuckyorangeIdentity,
   sendTwitterConversion,
 } from "../utils";
@@ -376,6 +377,7 @@ const AppController = ({ children }: AppControllerProps) => {
             sendLuckyorangeIdentity(user.id, {
               email,
             });
+            sendHubSpotIdentity(user.id, email);
           }
         }
       }
