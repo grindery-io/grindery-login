@@ -15,12 +15,12 @@ import { getErrorMessage } from "../utils";
  * the aforementioned operations when mounted.
  */
 const SessionController = () => {
-  // get user wallet address from local storage
-  const address = localStorage.getItem("grindery_user_address");
-
   // try to restore user auth session
   const restoreSession = useCallback(async () => {
     try {
+      // get user wallet address from local storage
+      const address = localStorage.getItem("grindery_user_address");
+
       // throw error if no address
       if (!address) {
         throw new Error("No address");
@@ -81,7 +81,7 @@ const SessionController = () => {
         "*"
       );
     }
-  }, [address]);
+  }, []);
 
   // clear user auth session
   const clearSession = useCallback(async () => {
