@@ -38,8 +38,8 @@ export const RightColumn = (props: Props) => {
       default:
         return (
           <Title
-            title="Join us or log in"
-            description="Connect MetaMask wallet to create a new account or to log into your existing one."
+            title="Sign-in or sign-up"
+            //description="Connect MetaMask wallet to create a new account or to log into your existing one."
           />
         );
     }

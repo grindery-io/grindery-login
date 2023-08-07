@@ -8,9 +8,9 @@ export const Steps = styled(Stack)({
   alignItems: "stretch",
   justifyContent: "flex-start",
   flexWrap: "nowrap",
-  gap: "24px",
-  "& h2": {
-    fontSize: "32px",
+  gap: "16px",
+  "& h3": {
+    fontSize: "20px",
     fontWeight: "700",
     lineHeight: "120%;",
     margin: 0,
