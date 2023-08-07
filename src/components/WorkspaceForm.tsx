@@ -25,6 +25,7 @@ export const WorkspaceForm = (props: Props) => {
     <>
       <FormControl fullWidth>
         <Select
+          style={{ background: "#fff" }}
           labelId="workpace-select-label"
           id="workpace-select"
           value={workspace}
