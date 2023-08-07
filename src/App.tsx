@@ -27,7 +27,7 @@ function App() {
                 <Logo src="/images/logo.svg" alt="Grindery logo" />
               </a>
             </Header>
-            <Columns>
+            <Columns sx={{ flexDirection: { xs: "column", sm: "row" } }}>
               <LeftColumn />
               <RightColumn />
             </Columns>

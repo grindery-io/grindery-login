@@ -158,6 +158,7 @@ export const RightColumn = (props: Props) => {
     <Column
       sx={{
         background: "#fff",
+        order: { xs: 1, sm: 2 },
       }}
     >
       <Form>

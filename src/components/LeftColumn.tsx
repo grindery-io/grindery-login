@@ -10,7 +10,7 @@ export const LeftColumn = (props: Props) => {
     <Column
       sx={{
         background: "#E0EDEE",
-        display: { xs: "none", sm: "flex" },
+        order: { xs: 2, sm: 1 },
       }}
     >
       <Steps>
