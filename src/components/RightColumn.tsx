@@ -157,7 +157,7 @@ export const RightColumn = (props: Props) => {
   return (
     <Column
       sx={{
-        background: "#E0EDEE",
+        background: "#fff",
         order: { xs: 1, sm: 2 },
         padding: { xs: "110px 24px 72px", sm: "72px 40px" },
       }}

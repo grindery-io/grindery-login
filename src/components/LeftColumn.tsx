@@ -8,7 +8,7 @@ export const LeftColumn = (props: Props) => {
   return (
     <Column
       sx={{
-        background: "#fff",
+        background: "#E0EDEE",
         order: { xs: 2, sm: 1 },
       }}
     >
