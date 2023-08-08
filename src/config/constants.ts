@@ -31,15 +31,23 @@ export const ONBOARDING_FIELDS = {
       "When we know what you are trying to do we can help you and personalize information and emails for you!",
     options: [
       {
-        value: "dApp2Zapier",
-        label: "Connect a specific dApp to Zapier",
+        value: "Use Grindery to get stuff done",
+        label: "Use Grindery to get stuff done",
       },
       {
-        value: "MyDapp2Zapier",
-        label: "Publish my dApp on Zapier",
+        value: "Build an agent for myself or my organization",
+        label: "Build an agent for myself or my organization",
       },
-      { value: "Learn", label: "Browse and learn" },
-      { value: "else", label: "Something else" },
+      {
+        value: "Build an agent to publish it for others",
+        label: "Build an agent to publish it for others",
+      },
+      {
+        value: "Integrate my (d)App with Grindery",
+        label: "Integrate my (d)App with Grindery",
+      },
+      { value: "Learning and exploration", label: "Learning and exploration" },
+      { value: "Other", label: "Other" },
     ],
   },
   skill: {
@@ -49,7 +57,7 @@ export const ONBOARDING_FIELDS = {
     options: [
       {
         value: "web3",
-        label: "I'm a web3 buildler",
+        label: "I'm a web3 builder",
       },
       {
         value: "zapier",

@@ -23,7 +23,7 @@ export const RightColumn = (props: Props) => {
         return (
           <Title
             title="Seems like you are new to Grindery"
-            description="Please provide your email address so we can activate your account."
+            description="We need to validate your account to activate it."
           />
         );
       case STATUS.WAITING_EMAIL_CONFIRMATION:

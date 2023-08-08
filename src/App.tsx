@@ -23,7 +23,11 @@ function App() {
                 justifyContent: { xs: "center", sm: "flex-start" },
               }}
             >
-              <a href="https://www.grindery.io" target="_blank">
+              <a
+                href="https://www.grindery.io"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Logo src="/images/logo.svg" alt="Grindery logo" />
               </a>
             </Header>
