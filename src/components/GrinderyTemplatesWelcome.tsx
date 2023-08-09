@@ -46,7 +46,7 @@ const GrinderyTemplatesWelcome = (props: Props) => {
 
   return (
     <>
-      <Box sx={{ minHeight: "178px", marginBottom: "20px" }}>
+      <Box sx={{ minHeight: "156px", marginBottom: "16px", maxWidth: "500px" }}>
         {triggerConnector && (
           <>
             <Stack
@@ -127,8 +127,8 @@ const GrinderyTemplatesWelcome = (props: Props) => {
             </Stack>
             <Typography
               style={{
-                marginBottom: "32px",
-                fontSize: "32px",
+                marginBottom: "0",
+                fontSize: "24px",
                 fontWeight: "bold",
                 textAlign: "center",
                 color: "#000",
@@ -142,11 +142,13 @@ const GrinderyTemplatesWelcome = (props: Props) => {
           </>
         )}
       </Box>
-      <Title
-        title=""
-        description="We are the easiest and fasted way for anyone to build and use
+      <Box sx={{ "& p": { fontSize: "16px" } }}>
+        <Title
+          title=""
+          description="We are the easiest and fasted way for anyone to build and use
       autonomous agents to connect Apps and dApps"
-      />
+        />
+      </Box>
     </>
   );
 };

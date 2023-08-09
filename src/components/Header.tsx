@@ -12,4 +12,5 @@ export const Header = styled(Stack)({
   height: "72px",
   padding: "0 24px",
   boxSizing: "border-box",
+  zIndex: 100,
 });
