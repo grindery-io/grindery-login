@@ -30,6 +30,8 @@ Config options can be specified via URL query parameters. The following options 
 
 - `redirect_uri`: The URL of the app where the user should be redirected after successfully signing in.
 - `workspaceRequired`: If set to `1`, the user will have to select a specific workspace from the list of user's workspaces to complete authentication.
+- `response_type`: Set to `code` to get authentication code in response. Optional.
+- `state`: Optional state parameter. Will be send in response.
 
 ## License
 

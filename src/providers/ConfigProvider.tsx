@@ -46,6 +46,12 @@ const ConfigProvider = ({ children }: Props) => {
   // get debug mode
   const debugMode = urlParams.get("debug");
 
+  // get chat response path
+  const responsePath = urlParams.get("response_path");
+
+  // get phone number
+  const phone = urlParams.get("phone");
+
   // set redirect uri to store
   useEffect(() => {
     if (redirect_uri) {
@@ -80,6 +86,20 @@ const ConfigProvider = ({ children }: Props) => {
       dispatch(appStoreActions.setState(state));
     }
   }, [state, dispatch]);
+
+  // set response path to store
+  useEffect(() => {
+    if (responsePath) {
+      dispatch(appStoreActions.setResponsePath(responsePath));
+    }
+  }, [responsePath, dispatch]);
+
+  // set phone to store
+  useEffect(() => {
+    if (phone) {
+      dispatch(appStoreActions.setPhone(phone));
+    }
+  }, [phone, dispatch]);
 
   return <>{children}</>;
 };

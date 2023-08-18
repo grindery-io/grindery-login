@@ -42,6 +42,8 @@ interface AppState {
   token: AuthToken | null; // Auth token
   workspaces: WorkspaceType[]; // List of user workspaces
   workspace: string; // Selected workspace
+  responsePath: string; // Chat response path
+  phone: string; // User phone number
 }
 
 // Initial state for the app's Redux store
@@ -57,6 +59,8 @@ const initialState: AppState = {
   token: null,
   workspaces: [],
   workspace: "personal",
+  responsePath: "",
+  phone: "",
 };
 
 // Create a Redux slice for the app store with reducer functions
@@ -107,6 +111,12 @@ const appSlice = createSlice({
     // Reducer to set the state state
     setState(state, action: PayloadAction<string>) {
       state.state = action.payload;
+    },
+    setResponsePath(state, action: PayloadAction<string>) {
+      state.responsePath = action.payload;
+    },
+    setPhone(state, action: PayloadAction<string>) {
+      state.phone = action.payload;
     },
   },
 });
