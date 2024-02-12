@@ -1,4 +1,4 @@
-export const ENGINE_URL = "https://orchestrator.grindery.org";
+export const ENGINE_URL = "https://orchestrator.grindery.com";
 export const DEFAULT_REDIRECT = "https://app.grindery.com";
 
 export type StatusDetailsType = {

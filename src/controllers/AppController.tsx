@@ -386,7 +386,7 @@ const AppController = ({ children }: AppControllerProps) => {
       if (responseType === "code") {
         // get login code
         const res = await axios.post(
-          `https://orchestrator.grindery.org/oauth/get-login-code`,
+          `https://orchestrator.grindery.com/oauth/get-login-code`,
           {},
           {
             headers: {
