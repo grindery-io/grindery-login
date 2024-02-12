@@ -49,9 +49,10 @@ const SessionController = () => {
       // eslint-disable-next-line
       const parentOrigin = document.referrer.match(/^.+:\/\/[^\/]+/)?.[0];
 
-      // throw error if parent origin is not grindery.io
+      // throw error if parent origin is not grindery.com
       if (
         !parentOrigin?.endsWith("grindery.io") &&
+        !parentOrigin?.endsWith("grindery.com") &&
         !parentOrigin?.endsWith("grindery.org") &&
         !parentOrigin?.endsWith("localhost:3000")
       ) {

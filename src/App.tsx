@@ -24,7 +24,7 @@ function App() {
               }}
             >
               <a
-                href="https://www.grindery.io"
+                href="https://www.grindery.com"
                 target="_blank"
                 rel="noreferrer"
               >

@@ -22,7 +22,7 @@ export const ConsentMessage = (props: Props) => {
       </Link>{" "}
       and{" "}
       <Link
-        href="https://www.grindery.io/privacy"
+        href="https://www.grindery.com/privacy"
         target="_blank"
         rel="noreferrer"
       >

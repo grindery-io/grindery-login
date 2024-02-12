@@ -1,5 +1,5 @@
 export const ENGINE_URL = "https://orchestrator.grindery.org";
-export const DEFAULT_REDIRECT = "https://app.grindery.io";
+export const DEFAULT_REDIRECT = "https://app.grindery.com";
 
 export type StatusDetailsType = {
   severity: "info" | "warning" | "error" | "success";

@@ -104,7 +104,7 @@ const GrinderyTemplatesWelcome = (props: Props) => {
                         height: "20px",
                         display: "block",
                       }}
-                      src="https://www.grindery.io/hubfs/plus-icon.svg"
+                      src="https://www.grindery.com/hubfs/plus-icon.svg"
                       alt="plus icon"
                     />
                   </Box>

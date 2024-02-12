@@ -12,7 +12,7 @@ type Props = {};
 const AppSpecificContent = (props: Props) => {
   const { redirect } = useAppSelector(selectAppStore);
   const renderContent = () => {
-    if (redirect.includes("templates.grindery.io")) {
+    if (redirect.includes("templates.grindery.com")) {
       return <GrinderyTemplatesWelcome />;
     }
     if (
